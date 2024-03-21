@@ -31,12 +31,9 @@ class CustomerWelcomeView extends StatelessWidget {
                 }),
                 CustomerUIButton(label: "Book Classes", onpress: (){
                   Get.to(()=>CustomerClassesView(chosenStudioID: chosenStudioID, userID: userID,));
-
                 }),
                 CustomerUIButton(label: "Book Workshop", onpress: (){
                   // Get.to(()=>ManagerWorkshopView(chosenStudioID: chosenStudioID,));
-
-
                 }),
                 CustomerUIButton(label: "Book Retreat", onpress: (){
                   // Get.to(()=>ManagerRetreatView(chosenStudioID: chosenStudioID,));

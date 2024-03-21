@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -24,6 +26,11 @@ class CustomerCoursesViewModel extends ChangeNotifier {
 
 // List<StudioClass>? get studioClass => _studioClasses;
 List<DetailedCourseModel>? get courseDetails => _courseDetails;
+
+initializeViewModel(int ChosenStudio,String userID){
+  setChosenStudioAndUserID(ChosenStudio, userID);
+  fetchCoursesList(ChosenStudio);
+}
 
   setChosenStudioAndUserID(int ChosenStudio,String userID){
     _chosenStudioID=ChosenStudio;
@@ -84,15 +91,14 @@ List<DetailedCourseModel>? get courseDetails => _courseDetails;
       );
 }
     else if(response==Availibility.Full){
-      Get.defaultDialog(title: "Chosen Course is fully booked",
-        content: Text("${listOfCourses![index].courseName} has no available spaces left. Pleast try another")
+      Get.defaultDialog(title: "Sorry, chosen Course is out of capacity",
+        content: Text("${listOfCourses![index].courseName} has no available spaces as the classes ran out of capacity left. Please try another")
       );
     }
     else{
+      if(response!=null&&response is double){
 
-      if(response!=null){
-        double totalPrice =double.parse(response);
-        
+        double totalPrice = response;
         saveBooking(index);
         Get.defaultDialog(title: "Course Booked Successfully",
             content: Column(

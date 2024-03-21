@@ -27,8 +27,7 @@ class _CustomerCoursesViewState extends State<CustomerCoursesView> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    context.read<CustomerCoursesViewModel>().setChosenStudioAndUserID(widget.chosenStudioID,widget.userID);
-    context.read<CustomerCoursesViewModel>().fetchCoursesList(widget.chosenStudioID);
+    context.read<CustomerCoursesViewModel>().initializeViewModel(widget.chosenStudioID,widget.userID);
   }
   @override
   Widget build(BuildContext context) {

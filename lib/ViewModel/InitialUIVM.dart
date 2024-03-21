@@ -19,6 +19,7 @@ class InitialUIViewModel extends ChangeNotifier {
     content: Column(
       children: [
         ElevatedButton(onPressed: (){
+          Get.back();
           Get.to(()=>CustomerLoginView());
         },
             child: const Text('Log In')),

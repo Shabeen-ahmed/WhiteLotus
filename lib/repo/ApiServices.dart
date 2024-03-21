@@ -530,14 +530,19 @@ class ApiService {
         print(response.body);
         print(response.statusCode);
         if (response.statusCode == 200) {
-          Map<String,dynamic> decodedResponse = jsonDecode(response.body);
-          if (decodedResponse['status'] == "SUCCESS") {
-            print('yep success');
-            return decodedResponse['price'];
-          } else if(response.body == "Full") {
-            return Availibility.Full;
+          if(response.body!='Full'){
+            Map<String,dynamic> decodedResponse = jsonDecode(response.body);
+            if (decodedResponse['status'] == "SUCCESS") {
+              print('yep success');
+              return decodedResponse['price'];
+            }
+            else{
+              return Status.FAILURE;
+            }
           }
-          else
+          else if(response.body=="Full") {
+            return Availibility.Full;
+          } else
          {
             return Status.FAILURE;
           }
@@ -746,5 +751,49 @@ class ApiService {
       print(e.toString());
     }
   }
+
+  login(String emailID)async {
+    try {
+      var url = Uri.parse("$ip/$databaseName/tryLogin.php");
+
+      final response = await http.post(
+        url,
+        body: {
+          "emailID": emailID.toString(),
+        },
+      );
+      print('repsonse got');
+      print(response.body);
+
+      if (response.statusCode == 200) {
+        if(response.body!="FAILURE"){
+            Map<String,dynamic> decodedResponse = jsonDecode(response.body);
+            if (decodedResponse['status'] == "SUCCESS") {
+              print('yep success');
+              return decodedResponse['userID'];
+            }
+            else{
+              return Status.FAILURE;
+            }
+        }
+        else{
+          return Status.FAILURE;
+        }
+      }
+      else {
+        Get.back();
+        Get.defaultDialog(
+            title: "Something went wrong",
+            content: Text('Request failed with status: ${response.statusCode}.')
+        );
+        print('Request failed with status: ${response.statusCode}.');
+      }
+      print("responseresponseresponse");
+    } catch (e) {
+      print("EXCEPTION CAUGHTTTT");
+      print(e.toString());
+    }
+  }
+
 
 }
