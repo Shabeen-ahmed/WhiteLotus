@@ -92,7 +92,19 @@ initializeViewModel(int ChosenStudio,String userID){
 }
     else if(response==Availibility.Full){
       Get.defaultDialog(title: "Sorry, chosen Course is out of capacity",
-        content: Text("${listOfCourses![index].courseName} has no available spaces as the classes ran out of capacity left. Please try another")
+        content: Text("${listOfCourses![index].courseName} has no available spaces as the classes ran out of capacity. Do you want to be added to waiting list?"),
+          actions: [
+            ElevatedButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: Text("NO")),
+            ElevatedButton(
+                onPressed: () {
+                  waiting_pressed(index);
+                },
+                child: Text("Yes")),
+          ]
       );
     }
     else{
@@ -118,6 +130,52 @@ initializeViewModel(int ChosenStudio,String userID){
 
     }
 
+  }
+
+  void waiting_pressed(int index) async {
+    //TODO: fix book saving by implementing shared preferences later
+    var response = await ApiService().waitingList(
+        userID: _userID,
+        waitingItemID: listOfCourses![index].courseId,
+        waitingType: bookingType.Course);
+    if (response == Status.FAILURE) {
+      Get.back();
+      Get.defaultDialog(
+          title: "Something went wrong",
+          content: Text("Something went wrong. Please try again later"));
+    } else {
+      if (response != null && response is double) {
+        // try {
+        double price = response;
+        await fetchCoursesList(_chosenStudioID!);
+        saveBooking(index);
+
+        notifyListeners();
+
+        Get.back();
+        Get.defaultDialog(
+            title: "Added To Waiting List Successfully",
+            content: Column(
+              children: [
+                Text(
+                    "Successfully added to waiting list for Course ${listOfCourses![index].courseName}"),
+                Text(
+                  'Payment will be '
+                      '$price Pounds',
+                  style: GoogleFonts.montserrat(fontSize: 18),
+                )
+              ],
+            ));
+        print('added');
+        print(bookedCourses);
+        // }
+        // catch(e){
+        //   print('error');
+        // }
+      } else {
+        print("chosen studio null");
+      }
+    }
   }
 
   void tileTapped(int index) {

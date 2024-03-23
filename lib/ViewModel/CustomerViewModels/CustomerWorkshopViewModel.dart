@@ -4,31 +4,29 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:white_lotus/Model/ClassesModel.dart';
-import 'package:white_lotus/Model/CourseModel.dart';
-import 'package:white_lotus/Model/StudiosModel.dart';
+import 'package:white_lotus/Model/WorkshopModel.dart';
 import 'package:white_lotus/repo/ApiServices.dart';
 import 'package:white_lotus/repo/MemoryHandler.dart';
 import '../../repo/KConstants.dart';
 
-class CustomerClassViewModel extends ChangeNotifier {
-  List<ClassModel>? listOfClasses;
-  List<ClassModel> _bookedClasses = [];
+class CustomerWorkshopViewModel extends ChangeNotifier {
+  List<WorkshopModel>? listOfWorkshops;
+  List<WorkshopModel> _bookedWorkshops = [];
 
   int? _chosenStudioID;
   String? _userID;
 
-  List<ClassModel> get bookedClasses => _bookedClasses;
+  List<WorkshopModel> get bookedWorkshops => _bookedWorkshops;
 
   setChosenStudioAndUserID(int ChosenStudio, String userID) {
     _chosenStudioID = ChosenStudio;
     _userID = userID;
   }
 
-  fetchClassesList(int StudioID) async {
-    var responseBody = await ApiService().fetchAllClasses(StudioID);
-    if (responseBody is List<ClassModel>) {
-      listOfClasses = responseBody;
+  fetchWorkshopsList(int StudioID) async {
+    var responseBody = await ApiService().fetchWorkshops(StudioID);
+    if (responseBody is List<WorkshopModel>) {
+      listOfWorkshops = responseBody;
     } else {
       Get.back();
       Get.defaultDialog(
@@ -45,8 +43,8 @@ class CustomerClassViewModel extends ChangeNotifier {
     //TODO: fix book saving by implementing shared preferences later
     var response = await ApiService().bookASession(
         userID: _userID,
-        bookingItemID: listOfClasses![index].classId,
-        BookingType: bookingType.Class);
+        bookingItemID: listOfWorkshops![index].workshopId,
+        BookingType: bookingType.Workshop);
     if (response == Status.FAILURE) {
       Get.back();
       Get.defaultDialog(
@@ -54,34 +52,34 @@ class CustomerClassViewModel extends ChangeNotifier {
           content: Text("Something went wrong. Please try again later"));
     } else if (response == Availibility.Full) {
       Get.defaultDialog(
-          title: "Class is unavailable",
+          title: "Workshop is unavailable",
           content: Text(
-              "Class ${listOfClasses![index].className} appears to be booked out."));
+              "Workshop ${listOfWorkshops![index].workshopName} appears to be booked out."));
     } else {
       if (response != null && response is double) {
         // try {
         double price = response;
-        await fetchClassesList(_chosenStudioID!);
+        await fetchWorkshopsList(_chosenStudioID!);
         saveBooking(index);
 
         notifyListeners();
 
         Get.back();
         Get.defaultDialog(
-            title: "Class Booked Successfully",
+            title: "Workshop Booked Successfully",
             content: Column(
               children: [
                 Text(
-                    "Successfully booked Class ${listOfClasses![index].className}"),
+                    "Successfully booked Workshop ${listOfWorkshops![index].workshopName}"),
                 Text(
                   'Payment will be '
-                  '$price Pounds',
+                      '$price Pounds',
                   style: GoogleFonts.montserrat(fontSize: 18),
                 )
               ],
             ));
         print('boooked');
-        print(_bookedClasses);
+        print(_bookedWorkshops);
         // }
         // catch(e){
         //   print('error');
@@ -96,8 +94,8 @@ class CustomerClassViewModel extends ChangeNotifier {
     //TODO: fix book saving by implementing shared preferences later
     var response = await ApiService().waitingList(
         userID: _userID,
-        waitingItemID: listOfClasses![index].classId,
-        waitingType: bookingType.Class);
+        waitingItemID: listOfWorkshops![index].workshopId,
+        waitingType: bookingType.Workshop);
     if (response == Status.FAILURE) {
       Get.back();
       Get.defaultDialog(
@@ -107,7 +105,7 @@ class CustomerClassViewModel extends ChangeNotifier {
       if (response != null && response is double) {
         // try {
         double price = response;
-        await fetchClassesList(_chosenStudioID!);
+        await fetchWorkshopsList(_chosenStudioID!);
         saveBooking(index);
 
         notifyListeners();
@@ -118,7 +116,7 @@ class CustomerClassViewModel extends ChangeNotifier {
             content: Column(
               children: [
                 Text(
-                    "Successfully added to waiting list for Class ${listOfClasses![index].className}"),
+                    "Successfully added to waiting list for Workshop ${listOfWorkshops![index].workshopName}"),
                 Text(
                   'Payment will be '
                       '$price Pounds',
@@ -127,7 +125,7 @@ class CustomerClassViewModel extends ChangeNotifier {
               ],
             ));
         print('added');
-        print(_bookedClasses);
+        print(_bookedWorkshops);
         // }
         // catch(e){
         //   print('error');
@@ -139,9 +137,9 @@ class CustomerClassViewModel extends ChangeNotifier {
   }
 
   void check_availibility(int index) async {
-    var response = await ApiService().checkAvailibilityClass(
-        bookingItemID: listOfClasses![index].classId,
-        BookingType: bookingType.Class);
+    var response = await ApiService().checkAvailibilityWorkshop(
+        bookingItemID: listOfWorkshops![index].workshopId,
+        BookingType: bookingType.Workshop);
     if (response == Status.FAILURE) {
       Get.back();
       Get.defaultDialog(
@@ -152,9 +150,9 @@ class CustomerClassViewModel extends ChangeNotifier {
     // saveBooking(index);
     else if (response == Availibility.Free) {
       Get.defaultDialog(
-          title: "Class is Available",
+          title: "Workshop is Available",
           content:
-              Text("Do you want to book ${listOfClasses![index].className}?"),
+          Text("Do you want to book ${listOfWorkshops![index].workshopName}?"),
           actions: [
             ElevatedButton(
                 onPressed: () {
@@ -169,12 +167,12 @@ class CustomerClassViewModel extends ChangeNotifier {
           ]);
 
       print('boooked');
-      print(_bookedClasses);
+      print(_bookedWorkshops);
     } else if (response == Availibility.Full) {
       Get.defaultDialog(
-        title: "Sorry, Class is Full",
+        title: "Sorry, Workshop is Full",
         content: Text(
-            "${listOfClasses![index].className} has booked out. Do you want to be added to the waiting list?"),
+            "${listOfWorkshops![index].workshopName} has booked out. Please try another Workshop."),
           actions: [
             ElevatedButton(
                 onPressed: () {
@@ -187,11 +185,10 @@ class CustomerClassViewModel extends ChangeNotifier {
                 },
                 child: Text("Yes")),
           ]
-
       );
 
       print('boooked');
-      print(_bookedClasses);
+      print(_bookedWorkshops);
     } else {
       Get.back();
       Get.defaultDialog(
@@ -201,23 +198,23 @@ class CustomerClassViewModel extends ChangeNotifier {
   }
 
   getSavedBooking() async {
-    _bookedClasses = [];
+    _bookedWorkshops = [];
     // SharedPreferences prefs = await SharedPreferences.getInstance();
     // await prefs.setString('savedBookings', '');
     var response = await MemoryHandler().getSavedBooking('savedBookings');
-    print("_bookedClasses");
-    print(_bookedClasses);
+    print("_bookedWorkshops");
+    print(_bookedWorkshops);
     print(response);
     print(response.runtimeType);
     response != null && response != ''
-        ? _bookedClasses = classModelFromJson(response)
+        ? _bookedWorkshops = workshopModelFromJson(response)
         : null;
     notifyListeners();
   }
 
   void saveBooking(int index) async {
-    MemoryHandler().saveClassBooking(
-        key: 'savedBookings', classToSave: listOfClasses![index]);
-    _bookedClasses.add(listOfClasses![index]);
+    MemoryHandler().saveWorkshopBooking(
+        key: 'savedBookings', workshopToSave: listOfWorkshops![index]);
+    _bookedWorkshops.add(listOfWorkshops![index]);
   }
 }

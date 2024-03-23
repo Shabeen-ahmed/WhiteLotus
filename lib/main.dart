@@ -4,6 +4,8 @@ import 'package:white_lotus/View/InitialUI.dart';
 import 'package:provider/provider.dart';
 import 'package:white_lotus/ViewModel/CustomerViewModels/CustomerClassViewModel.dart';
 import 'package:white_lotus/ViewModel/CustomerViewModels/CustomerCourseViewModel.dart';
+import 'package:white_lotus/ViewModel/CustomerViewModels/CustomerWorkshopViewModel.dart';
+import 'package:white_lotus/ViewModel/CustomerViewModels/CustomerRetreatViewModel.dart';
 import 'package:white_lotus/ViewModel/InitialUIVM.dart';
 import 'package:white_lotus/ViewModel/ListOfStudiosVM.dart';
 import 'package:white_lotus/ViewModel/ManagerViewModels/ManagerClassVM.dart';
@@ -34,6 +36,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => CustomerCoursesViewModel()),
         ChangeNotifierProvider(create: (_) => CustomerLoginRegisterViewModel()),
         ChangeNotifierProvider(create: (_) => CustomerClassViewModel()),
+        ChangeNotifierProvider(create: (_) => CustomerWorkshopViewModel()),
+        ChangeNotifierProvider(create: (_) => CustomerRetreatViewModel()),
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,

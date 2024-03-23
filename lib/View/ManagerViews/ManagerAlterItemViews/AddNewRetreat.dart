@@ -12,6 +12,7 @@ class AddNewRetreat extends StatelessWidget {
   TextEditingController RetreatName = TextEditingController();
   TextEditingController Meal = TextEditingController();
   TextEditingController Activity = TextEditingController();
+  TextEditingController Price = TextEditingController();
   TextEditingController WorkshopID = TextEditingController();
 
   @override
@@ -77,6 +78,20 @@ class AddNewRetreat extends StatelessWidget {
                             padding: const EdgeInsets.all(8.0),
                             child: Column(
                               children: [
+                                Text("Price"),
+                                TextField(
+                                  // label: 'Enter current password',
+                                  controller: Price,
+                                  // validator:  (value) =>
+                                  // value.isEmpty ? 'Password cannot be blank' : null,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
                                 Text("WorkshopID"),
                                 TextField(
                                   // label: 'Enter current password',
@@ -94,6 +109,7 @@ class AddNewRetreat extends StatelessWidget {
                                   retreatName: RetreatName.text,
                                   meal: Meal.text,
                                   activity: Activity.text,
+                                  price: Price.text,
                                   workshopId: WorkshopID.text,
                                 );
 
@@ -103,6 +119,7 @@ class AddNewRetreat extends StatelessWidget {
                                   RetreatName.clear();
                                   Meal.clear();
                                   Activity.clear();
+                                  Price.clear();
                                   WorkshopID.clear();
                                   Get.back();
                                   Get.back();

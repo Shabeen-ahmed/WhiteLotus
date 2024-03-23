@@ -4,9 +4,10 @@ enum control_came_from{
   Customers
 }
 
-String ip ="http://192.168.1.180";
+// String ip ="http://192.168.1.180";
 // String ip ="http://172.19.38.59";
 // String ip ="http://172.20.46.21";
+String ip = "http://192.168.0.34";
 String databaseName = "whitelotus";
 
 

@@ -79,6 +79,8 @@ class _ManagerRetreatViewState extends State<ManagerRetreatView> {
                                 Text(
                                     "${managerRetreatViewModel.listOfRetreats![index].meal}", style: NormalText),
                                 Text(
+                                    "${managerRetreatViewModel.listOfRetreats![index].price}", style: NormalText),
+                                Text(
                                     "${managerRetreatViewModel.listOfRetreats![index].retreatId}", style: NormalText),
                                 ElevatedButton(
                                     onPressed: () {
