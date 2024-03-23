@@ -891,5 +891,48 @@ class ApiService {
     }
   }
 
+  cancel(String bookingID)async {
+    try {
+      var url = Uri.parse("$ip/$databaseName/cancelBooking.php");
+
+      final response = await http.post(
+        url,
+        body: {
+          "bookingID": bookingID.toString(),
+        },
+      );
+      print('repsonse got');
+      print(response.body);
+
+      if (response.statusCode == 200) {
+        if(response.body!="FAILURE"){
+          Map<String,dynamic> decodedResponse = jsonDecode(response.body);
+          if (decodedResponse['status'] == "SUCCESS") {
+            print('yep success');
+            return decodedResponse['name'];
+          }
+          else{
+            return Status.FAILURE;
+          }
+        }
+        else{
+          return Status.FAILURE;
+        }
+      }
+      else {
+        Get.back();
+        Get.defaultDialog(
+            title: "Something went wrong",
+            content: Text('Request failed with status: ${response.statusCode}.')
+        );
+        print('Request failed with status: ${response.statusCode}.');
+      }
+      print("responseresponseresponse");
+    } catch (e) {
+      print("EXCEPTION CAUGHTTTT");
+      print(e.toString());
+    }
+  }
+
 
 }

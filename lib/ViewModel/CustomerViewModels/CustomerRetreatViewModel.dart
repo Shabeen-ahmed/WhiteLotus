@@ -139,7 +139,7 @@ class CustomerRetreatViewModel extends ChangeNotifier {
   void check_availibility(int index) async {
     var response = await ApiService().checkAvailibilityWorkshop(
         bookingItemID: listOfRetreats![index].workshopId,
-        BookingType: bookingType.Retreat);
+        BookingType: bookingType.Workshop);
     if (response == Status.FAILURE) {
       Get.back();
       Get.defaultDialog(

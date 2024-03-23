@@ -7,6 +7,7 @@ import 'package:white_lotus/View/CustomerViews/CustomerClassView.dart';
 import 'package:white_lotus/View/CustomerViews/CustomerCourseView.dart';
 import 'package:white_lotus/View/CustomerViews/CustomerWorkshopView.dart';
 import 'package:white_lotus/View/CustomerViews/CustomerRetreatView.dart';
+import 'package:white_lotus/View/CustomerViews/CustomerCancelView.dart';
 import 'package:white_lotus/repo/ApiServices.dart';
 
 import '../ManagerViews/ManagerCoursesView.dart';
@@ -39,6 +40,9 @@ class CustomerWelcomeView extends StatelessWidget {
                 }),
                 CustomerUIButton(label: "Book Retreat", onpress: (){
                   Get.to(()=>CustomerRetreatsView(chosenStudioID: chosenStudioID, userID: userID,));
+                }),
+                CustomerUIButton(label: "Cancel a Booking", onpress: (){
+                  Get.to(()=>CustomerCancelView());
                 }),
               ],
             )
