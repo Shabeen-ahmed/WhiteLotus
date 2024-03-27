@@ -1,9 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:white_lotus/Model/WorkshopModel.dart';
 import 'package:white_lotus/repo/ApiServices.dart';
 import 'package:white_lotus/repo/MemoryHandler.dart';
@@ -40,7 +37,6 @@ class CustomerWorkshopViewModel extends ChangeNotifier {
   }
 
   void booking_pressed(int index) async {
-    //TODO: fix book saving by implementing shared preferences later
     var response = await ApiService().bookASession(
         userID: _userID,
         bookingItemID: listOfWorkshops![index].workshopId,
@@ -57,33 +53,32 @@ class CustomerWorkshopViewModel extends ChangeNotifier {
               "Workshop ${listOfWorkshops![index].workshopName} appears to be booked out."));
     } else {
       if (response != null && response is double) {
-        // try {
-        double price = response;
-        await fetchWorkshopsList(_chosenStudioID!);
-        saveBooking(index);
+        try {
+          double price = response;
 
-        notifyListeners();
+          await fetchWorkshopsList(_chosenStudioID!);
 
-        Get.back();
-        Get.defaultDialog(
-            title: "Workshop Booked Successfully",
-            content: Column(
-              children: [
-                Text(
-                    "Successfully booked Workshop ${listOfWorkshops![index].workshopName}"),
-                Text(
-                  'Payment will be '
-                      '$price Pounds',
-                  style: GoogleFonts.montserrat(fontSize: 18),
-                )
-              ],
-            ));
-        print('boooked');
-        print(_bookedWorkshops);
-        // }
-        // catch(e){
-        //   print('error');
-        // }
+          saveBooking(index);
+
+          notifyListeners();
+
+          Get.back();
+          Get.defaultDialog(
+              title: "Workshop Booked Successfully",
+              content: Column(
+                children: [
+                  Text(
+                      "Successfully booked Workshop ${listOfWorkshops![index].workshopName}"),
+                  Text(
+                    'Payment will be '
+                    '$price Pounds',
+                    style: GoogleFonts.montserrat(fontSize: 18),
+                  )
+                ],
+              ));
+        } catch (e) {
+          print('error');
+        }
       } else {
         print("chosen studio null");
       }
@@ -103,33 +98,30 @@ class CustomerWorkshopViewModel extends ChangeNotifier {
           content: Text("Something went wrong. Please try again later"));
     } else {
       if (response != null && response is double) {
-        // try {
-        double price = response;
-        await fetchWorkshopsList(_chosenStudioID!);
-        saveBooking(index);
+        try {
+          double price = response;
+          await fetchWorkshopsList(_chosenStudioID!);
+          saveBooking(index);
 
-        notifyListeners();
+          notifyListeners();
 
-        Get.back();
-        Get.defaultDialog(
-            title: "Added To Waiting List Successfully",
-            content: Column(
-              children: [
-                Text(
-                    "Successfully added to waiting list for Workshop ${listOfWorkshops![index].workshopName}"),
-                Text(
-                  'Payment will be '
-                      '$price Pounds',
-                  style: GoogleFonts.montserrat(fontSize: 18),
-                )
-              ],
-            ));
-        print('added');
-        print(_bookedWorkshops);
-        // }
-        // catch(e){
-        //   print('error');
-        // }
+          Get.back();
+          Get.defaultDialog(
+              title: "Added To Waiting List Successfully",
+              content: Column(
+                children: [
+                  Text(
+                      "Successfully added to waiting list for Workshop ${listOfWorkshops![index].workshopName}"),
+                  Text(
+                    'Payment will be '
+                    '$price Pounds',
+                    style: GoogleFonts.montserrat(fontSize: 18),
+                  )
+                ],
+              ));
+        } catch (e) {
+          print('error');
+        }
       } else {
         print("chosen studio null");
       }
@@ -151,8 +143,8 @@ class CustomerWorkshopViewModel extends ChangeNotifier {
     else if (response == Availibility.Free) {
       Get.defaultDialog(
           title: "Workshop is Available",
-          content:
-          Text("Do you want to book ${listOfWorkshops![index].workshopName}?"),
+          content: Text(
+              "Do you want to book ${listOfWorkshops![index].workshopName}?"),
           actions: [
             ElevatedButton(
                 onPressed: () {
@@ -165,14 +157,11 @@ class CustomerWorkshopViewModel extends ChangeNotifier {
                 },
                 child: Text("Yes")),
           ]);
-
-      print('boooked');
-      print(_bookedWorkshops);
     } else if (response == Availibility.Full) {
       Get.defaultDialog(
-        title: "Sorry, Workshop is Full",
-        content: Text(
-            "${listOfWorkshops![index].workshopName} has booked out. Please try another Workshop."),
+          title: "Sorry, Workshop is Full",
+          content: Text(
+              "${listOfWorkshops![index].workshopName} has booked out. Please try another Workshop."),
           actions: [
             ElevatedButton(
                 onPressed: () {
@@ -184,11 +173,7 @@ class CustomerWorkshopViewModel extends ChangeNotifier {
                   waiting_pressed(index);
                 },
                 child: Text("Yes")),
-          ]
-      );
-
-      print('boooked');
-      print(_bookedWorkshops);
+          ]);
     } else {
       Get.back();
       Get.defaultDialog(
@@ -199,13 +184,7 @@ class CustomerWorkshopViewModel extends ChangeNotifier {
 
   getSavedBooking() async {
     _bookedWorkshops = [];
-    // SharedPreferences prefs = await SharedPreferences.getInstance();
-    // await prefs.setString('savedBookings', '');
-    var response = await MemoryHandler().getSavedBooking('savedBookings');
-    print("_bookedWorkshops");
-    print(_bookedWorkshops);
-    print(response);
-    print(response.runtimeType);
+    var response = await MemoryHandler().getSavedBooking('savedWaitingList');
     response != null && response != ''
         ? _bookedWorkshops = workshopModelFromJson(response)
         : null;
@@ -214,7 +193,7 @@ class CustomerWorkshopViewModel extends ChangeNotifier {
 
   void saveBooking(int index) async {
     MemoryHandler().saveWorkshopBooking(
-        key: 'savedBookings', workshopToSave: listOfWorkshops![index]);
+        key: 'savedWaitingList', workshopToSave: listOfWorkshops![index]);
     _bookedWorkshops.add(listOfWorkshops![index]);
   }
 }

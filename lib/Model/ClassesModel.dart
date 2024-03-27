@@ -1,12 +1,12 @@
-// To parse this JSON data, do
-//
-//     final classModel = classModelFromJson(jsonString);
+// ignore_for_file: file_names
 
 import 'dart:convert';
 
-List<ClassModel> classModelFromJson(String str) => List<ClassModel>.from(json.decode(str).map((x) => ClassModel.fromJson(x)));
+List<ClassModel> classModelFromJson(String str) =>
+    List<ClassModel>.from(json.decode(str).map((x) => ClassModel.fromJson(x)));
 
-String classModelToJson(List<ClassModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String classModelToJson(List<ClassModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class ClassModel {
   String? classId;
@@ -38,32 +38,32 @@ class ClassModel {
   });
 
   factory ClassModel.fromJson(Map<String, dynamic> json) => ClassModel(
-    classId: json["ClassID"],
-    className: json["ClassName"],
-    type: json["Type"],
-    level: json["Level"],
-    capacity: json["Capacity"],
-    price: json["Price"],
-    duration: json["Duration"],
-    schedule: json["Schedule"],
-    courseId: json["CourseID"],
-    teacherId: json["TeacherID"],
-    teacherName: json["TeacherName"],
-    courseName: json["CourseName"],
-  );
+        classId: json["ClassID"],
+        className: json["ClassName"],
+        type: json["Type"],
+        level: json["Level"],
+        capacity: json["Capacity"],
+        price: json["Price"],
+        duration: json["Duration"],
+        schedule: json["Schedule"],
+        courseId: json["CourseID"],
+        teacherId: json["TeacherID"],
+        teacherName: json["TeacherName"],
+        courseName: json["CourseName"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "ClassID": classId,
-    "ClassName": className,
-    "Type": type,
-    "Level": level,
-    "Capacity": capacity,
-    "Price": price,
-    "Duration": duration,
-    "Schedule": schedule,
-    "CourseID": courseId,
-    "TeacherID": teacherId,
-    "TeacherName": teacherName,
-    "CourseName": courseName,
-  };
+        "ClassID": classId,
+        "ClassName": className,
+        "Type": type,
+        "Level": level,
+        "Capacity": capacity,
+        "Price": price,
+        "Duration": duration,
+        "Schedule": schedule,
+        "CourseID": courseId,
+        "TeacherID": teacherId,
+        "TeacherName": teacherName,
+        "CourseName": courseName,
+      };
 }

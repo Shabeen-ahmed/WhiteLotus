@@ -18,7 +18,6 @@ class CustomerWorkshopsView extends StatefulWidget {
 class _CustomerWorkshopsViewState extends State<CustomerWorkshopsView> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     context
         .read<CustomerWorkshopViewModel>()
@@ -31,136 +30,109 @@ class _CustomerWorkshopsViewState extends State<CustomerWorkshopsView> {
   @override
   Widget build(BuildContext context) {
     CustomerWorkshopViewModel customerWorkshopsViewModel =
-    context.watch<CustomerWorkshopViewModel>();
+        context.watch<CustomerWorkshopViewModel>();
     return Scaffold(
-      floatingActionButton: kFloatingActionButton(onpress: () {
-        // Get.to(() => AddNewCourse());
-      }),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+      floatingActionButton: kFloatingActionBack(),
       body: customerWorkshopsViewModel.listOfWorkshops != null
           ? SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text("Select Workshop"),
-            Column(
-              children: [
-                SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                  height: 700,
-                  child: ListView.builder(
-                    itemCount:
-                    customerWorkshopsViewModel.listOfWorkshops!.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return ListTile(
-                        title: GestureDetector(
-                            onTap: () {},
-                            child: Text(customerWorkshopsViewModel
-                                .listOfWorkshops![index].workshopName)),
-                        subtitle: GestureDetector(
-                          onTap: () {
-                            // Get.to(()=>ManagerDetailedCourseViewB());
-                            // Navigator.push(context,
-                            // MaterialPageRoute(builder: (BuildContext context) {
-                            //   // return ManagerDetailedCourseView(key: Key(''));
-                            // }));
-                            // listOfStudiosViewModel.listTile_pressed(index);
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("Select Workshop"),
+                  Column(
+                    children: [
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        height: 700,
+                        child: ListView.builder(
+                          itemCount: customerWorkshopsViewModel
+                              .listOfWorkshops!.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return ListTile(
+                              title: GestureDetector(
+                                  onTap: () {},
+                                  child: Text(customerWorkshopsViewModel
+                                      .listOfWorkshops![index].workshopName)),
+                              subtitle: DisplayCard(
+                                body: customerWorkshopsViewModel.bookedWorkshops
+                                        .map((e) => e.workshopId)
+                                        .contains(customerWorkshopsViewModel
+                                            .listOfWorkshops![index].workshopId)
+                                    ? Column(
+                                        children: [
+                                          Text(
+                                              customerWorkshopsViewModel.listOfWorkshops![index].workshopName),
+                                          Text(
+                                              "${customerWorkshopsViewModel.listOfWorkshops![index].teacherName}"),
+                                          Text(
+                                              customerWorkshopsViewModel.listOfWorkshops![index].price),
+                                          Text(
+                                              customerWorkshopsViewModel.listOfWorkshops![index].duration),
+                                          Text(
+                                              customerWorkshopsViewModel.listOfWorkshops![index].capacity),
+                                          Text(
+                                              customerWorkshopsViewModel.listOfWorkshops![index].theme),
+                                          ElevatedButton(
+                                            onPressed: () {},
+                                            style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors.green),
+                                            child: const Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text("Booked "),
+                                                Icon(Icons.check_box_rounded),
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      )
+                                    : Column(
+                                        children: [
+                                          Text(
+                                              customerWorkshopsViewModel.listOfWorkshops![index].workshopName),
+                                          Text(
+                                              "${customerWorkshopsViewModel.listOfWorkshops![index].teacherName}"),
+                                          Text(
+                                              customerWorkshopsViewModel.listOfWorkshops![index].price),
+                                          Text(
+                                              customerWorkshopsViewModel.listOfWorkshops![index].duration),
+                                          Text(
+                                              customerWorkshopsViewModel.listOfWorkshops![index].capacity),
+                                          Text(
+                                              customerWorkshopsViewModel.listOfWorkshops![index].theme),
+                                          ElevatedButton(
+                                              onPressed: () {
+                                                customerWorkshopsViewModel
+                                                    .check_availibility(index);
+                                              },
+                                              child: const Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text("Check Availibility "),
+                                                  Icon(Icons
+                                                      .chevron_right_sharp),
+                                                ],
+                                              ))
+                                        ],
+                                      ),
+                              ),
+                            );
                           },
-                          child: DisplayCard(
-                            body:
-                            // customerCoursesViewModel.bookedCourses.contains(customerCoursesViewModel.listOfCourses![index])
-                            customerWorkshopsViewModel.bookedWorkshops
-                                .map((e) => e.workshopId)
-                                .contains(customerWorkshopsViewModel
-                                .listOfWorkshops![index]
-                                .workshopId)
-                                ? Column(
-                              children: [
-                                Text(
-                                    "${customerWorkshopsViewModel.listOfWorkshops![index].workshopName}"),
-                                Text(
-                                    "${customerWorkshopsViewModel.listOfWorkshops![index].teacherName}"),
-                                Text(
-                                    "${customerWorkshopsViewModel.listOfWorkshops![index].price}"),
-                                Text(
-                                    "${customerWorkshopsViewModel.listOfWorkshops![index].duration}"),
-                                Text(
-                                    "${customerWorkshopsViewModel.listOfWorkshops![index].capacity}"),
-                                Text(
-                                    "${customerWorkshopsViewModel.listOfWorkshops![index].theme}"),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    // customerClassesViewModel
-                                    //     .booking_pressed(index);
-                                    print(
-                                        customerWorkshopsViewModel
-                                            .bookedWorkshops);
-                                  },
-                                  style:
-                                  ElevatedButton.styleFrom(
-                                      backgroundColor:
-                                      Colors.green),
-                                  child: const Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment
-                                        .center,
-                                    children: [
-                                      Text("Booked "),
-                                      Icon(Icons
-                                          .check_box_rounded),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            )
-                                : Column(
-                              children: [
-                                Text(
-                                    "${customerWorkshopsViewModel.listOfWorkshops![index].workshopName}"),
-                                Text(
-                                    "${customerWorkshopsViewModel.listOfWorkshops![index].teacherName}"),
-                                Text(
-                                    "${customerWorkshopsViewModel.listOfWorkshops![index].price}"),
-                                Text(
-                                    "${customerWorkshopsViewModel.listOfWorkshops![index].duration}"),
-                                Text(
-                                    "${customerWorkshopsViewModel.listOfWorkshops![index].capacity}"),
-                                Text(
-                                    "${customerWorkshopsViewModel.listOfWorkshops![index].theme}"),
-                                ElevatedButton(
-                                    onPressed: () {
-                                      customerWorkshopsViewModel
-                                          .check_availibility(
-                                          index);
-                                    },
-                                    child: const Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment
-                                          .center,
-                                      children: [
-                                        Text(
-                                            "Check Availibility "),
-                                        Icon(Icons
-                                            .chevron_right_sharp),
-                                      ],
-                                    ))
-                              ],
-                            ),
-                          ),
                         ),
-                      );
-                    },
-                  ),
-                )
-              ],
+                      )
+                    ],
+                  )
+                ],
+              ),
             )
-          ],
-        ),
-      )
-          : Center(
-        child: CircularProgressIndicator(),
-      ),
+          : const Center(
+              child: CircularProgressIndicator(),
+            ),
     );
   }
 

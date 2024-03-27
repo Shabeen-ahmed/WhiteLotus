@@ -18,7 +18,6 @@ class CustomerCancelViewModel extends ChangeNotifier {
                   "Successfully cancelled your booking for ${name}"),
             ],
           ));
-      print('added');
     }
     else{
       Get.defaultDialog(title: "Booking ID not found.",

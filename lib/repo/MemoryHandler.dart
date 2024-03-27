@@ -31,7 +31,7 @@ class MemoryHandler{
         }
     else {
       await prefs.setString(key, classModelToJson([classToSave]));
-      print("returned string null");
+      print("returned null string");
     }
   }
 
@@ -40,13 +40,9 @@ class MemoryHandler{
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     if(getString!=null&&getString!=''){
-      print('is error here?');
-      print(getString);
       List<CourseModel> bookedCourse = courseModelFromJson(getString);
       bookedCourse.add(courseToSave);
       await prefs.setString(key, listOfCourseModelToJsonForSP(bookedCourse));
-      print('is error here?');
-
     }
     else {
       await prefs.setString(key, '[${courseModelToJsonForSP(courseToSave)}]');

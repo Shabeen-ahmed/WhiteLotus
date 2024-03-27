@@ -1,12 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:white_lotus/Model/ClassesModel.dart';
-import 'package:white_lotus/Model/CourseModel.dart';
-import 'package:white_lotus/Model/StudiosModel.dart';
 import 'package:white_lotus/repo/ApiServices.dart';
 import 'package:white_lotus/repo/MemoryHandler.dart';
 import '../../repo/KConstants.dart';
@@ -25,8 +20,9 @@ class CustomerClassViewModel extends ChangeNotifier {
     _userID = userID;
   }
 
-  fetchClassesList(int StudioID) async {
-    var responseBody = await ApiService().fetchAllClasses(StudioID);
+  fetchClassesList(int chosenStudioID) async {
+    var responseBody = await ApiService().fetchAllClasses(chosenStudioID);
+
     if (responseBody is List<ClassModel>) {
       listOfClasses = responseBody;
     } else {
@@ -42,11 +38,11 @@ class CustomerClassViewModel extends ChangeNotifier {
   }
 
   void booking_pressed(int index) async {
-    //TODO: fix book saving by implementing shared preferences later
     var response = await ApiService().bookASession(
         userID: _userID,
         bookingItemID: listOfClasses![index].classId,
         BookingType: bookingType.Class);
+
     if (response == Status.FAILURE) {
       Get.back();
       Get.defaultDialog(
@@ -59,7 +55,6 @@ class CustomerClassViewModel extends ChangeNotifier {
               "Class ${listOfClasses![index].className} appears to be booked out."));
     } else {
       if (response != null && response is double) {
-        // try {
         double price = response;
         await fetchClassesList(_chosenStudioID!);
         saveBooking(index);
@@ -80,12 +75,6 @@ class CustomerClassViewModel extends ChangeNotifier {
                 )
               ],
             ));
-        print('boooked');
-        print(_bookedClasses);
-        // }
-        // catch(e){
-        //   print('error');
-        // }
       } else {
         print("chosen studio null");
       }
@@ -93,7 +82,6 @@ class CustomerClassViewModel extends ChangeNotifier {
   }
 
   void waiting_pressed(int index) async {
-    //TODO: fix book saving by implementing shared preferences later
     var response = await ApiService().waitingList(
         userID: _userID,
         waitingItemID: listOfClasses![index].classId,
@@ -105,7 +93,6 @@ class CustomerClassViewModel extends ChangeNotifier {
           content: Text("Something went wrong. Please try again later"));
     } else {
       if (response != null && response is double) {
-        // try {
         double price = response;
         await fetchClassesList(_chosenStudioID!);
         saveBooking(index);
@@ -121,20 +108,12 @@ class CustomerClassViewModel extends ChangeNotifier {
                     "Successfully added to waiting list for Class ${listOfClasses![index].className}"),
                 Text(
                   'Payment will be '
-                      '$price Pounds',
+                  '$price Pounds',
                   style: GoogleFonts.montserrat(fontSize: 18),
                 )
               ],
             ));
-        print('added');
-        print(_bookedClasses);
-        // }
-        // catch(e){
-        //   print('error');
-        // }
-      } else {
-        print("chosen studio null");
-      }
+      } else {}
     }
   }
 
@@ -147,10 +126,7 @@ class CustomerClassViewModel extends ChangeNotifier {
       Get.defaultDialog(
           title: "Something went wrong",
           content: Text("Something went wrong. Please try again later"));
-    }
-    // await fetchClassesList(_chosenStudioID!);
-    // saveBooking(index);
-    else if (response == Availibility.Free) {
+    } else if (response == Availibility.Free) {
       Get.defaultDialog(
           title: "Class is Available",
           content:
@@ -167,14 +143,11 @@ class CustomerClassViewModel extends ChangeNotifier {
                 },
                 child: Text("Yes")),
           ]);
-
-      print('boooked');
-      print(_bookedClasses);
     } else if (response == Availibility.Full) {
       Get.defaultDialog(
-        title: "Sorry, Class is Full",
-        content: Text(
-            "${listOfClasses![index].className} has booked out. Do you want to be added to the waiting list?"),
+          title: "Sorry, Class is Full",
+          content: Text(
+              "${listOfClasses![index].className} has booked out. Do you want to be added to the waiting list?"),
           actions: [
             ElevatedButton(
                 onPressed: () {
@@ -186,12 +159,7 @@ class CustomerClassViewModel extends ChangeNotifier {
                   waiting_pressed(index);
                 },
                 child: Text("Yes")),
-          ]
-
-      );
-
-      print('boooked');
-      print(_bookedClasses);
+          ]);
     } else {
       Get.back();
       Get.defaultDialog(
@@ -202,22 +170,20 @@ class CustomerClassViewModel extends ChangeNotifier {
 
   getSavedBooking() async {
     _bookedClasses = [];
-    // SharedPreferences prefs = await SharedPreferences.getInstance();
-    // await prefs.setString('savedBookings', '');
+
     var response = await MemoryHandler().getSavedBooking('savedBookings');
-    print("_bookedClasses");
-    print(_bookedClasses);
-    print(response);
-    print(response.runtimeType);
-    response != null && response != ''
-        ? _bookedClasses = classModelFromJson(response)
-        : null;
+
+    if (response != null && response != '') {
+      _bookedClasses = classModelFromJson(response);
+    }
+
     notifyListeners();
   }
 
   void saveBooking(int index) async {
     MemoryHandler().saveClassBooking(
         key: 'savedBookings', classToSave: listOfClasses![index]);
+
     _bookedClasses.add(listOfClasses![index]);
   }
 }

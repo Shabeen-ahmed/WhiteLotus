@@ -1,7 +1,5 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:white_lotus/Model/ClassesModel.dart';
 import 'package:white_lotus/repo/ApiServices.dart';
 import 'package:white_lotus/repo/KConstants.dart';
@@ -17,11 +15,13 @@ class AddNewClass extends StatelessWidget {
   TextEditingController CourseID = TextEditingController();
   TextEditingController TeacherID = TextEditingController();
 
+  AddNewClass({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add new class"),
+        title: const Text("Add new class"),
       ),
       body: SingleChildScrollView(
           child: SingleChildScrollView(
@@ -29,7 +29,7 @@ class AddNewClass extends StatelessWidget {
             padding: const EdgeInsets.all(30.0),
             child: Column(
               children: [
-                Container(
+                SizedBox(
                   width: 200,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -38,12 +38,9 @@ class AddNewClass extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           children: [
-                            Text("Class name"),
+                            const Text("Class name"),
                             TextField(
-                              // label: 'Enter current password',
                               controller: ClassName,
-                              // validator:  (value) =>
-                              // value.isEmpty ? 'Password cannot be blank' : null,
                             ),
                           ],
                         ),
@@ -52,12 +49,9 @@ class AddNewClass extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           children: [
-                            Text("Type"),
+                            const Text("Type"),
                             TextField(
-                              // label: 'Enter current password',
                               controller: Type,
-                              // validator:  (value) =>
-                              // value.isEmpty ? 'Password cannot be blank' : null,
                             ),
                           ],
                         ),
@@ -66,12 +60,9 @@ class AddNewClass extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           children: [
-                            Text("Level"),
+                            const Text("Level"),
                             TextField(
-                              // label: 'Enter current password',
                               controller: Level,
-                              // validator:  (value) =>
-                              // value.isEmpty ? 'Password cannot be blank' : null,
                             ),
                           ],
                         ),
@@ -80,12 +71,9 @@ class AddNewClass extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           children: [
-                            Text("Price"),
+                            const Text("Price"),
                             TextField(
-                              // label: 'Enter current password',
                               controller: Price,
-                              // validator:  (value) =>
-                              // value.isEmpty ? 'Password cannot be blank' : null,
                             ),
                           ],
                         ),
@@ -94,12 +82,9 @@ class AddNewClass extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           children: [
-                            Text("Capacity"),
+                            const Text("Capacity"),
                             TextField(
-                              // label: 'Enter current password',
                               controller: Capacity,
-                              // validator:  (value) =>
-                              // value.isEmpty ? 'Password cannot be blank' : null,
                             ),
                           ],
                         ),
@@ -108,12 +93,9 @@ class AddNewClass extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           children: [
-                            Text("Duration"),
+                            const Text("Duration"),
                             TextField(
-                              // label: 'Enter current password',
                               controller: Durationn,
-                              // validator:  (value) =>
-                              // value.isEmpty ? 'Password cannot be blank' : null,
                             ),
                           ],
                         ),
@@ -122,12 +104,9 @@ class AddNewClass extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           children: [
-                            Text("Schedule"),
+                            const Text("Schedule"),
                             TextField(
-                              // label: 'Enter current password',
                               controller: Schedule,
-                              // validator:  (value) =>
-                              // value.isEmpty ? 'Password cannot be blank' : null,
                             ),
                           ],
                         ),
@@ -136,12 +115,9 @@ class AddNewClass extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           children: [
-                            Text("CourseID"),
+                            const Text("CourseID"),
                             TextField(
-                              // label: 'Enter current password',
                               controller: CourseID,
-                              // validator:  (value) =>
-                              // value.isEmpty ? 'Password cannot be blank' : null,
                             ),
                           ],
                         ),
@@ -150,12 +126,9 @@ class AddNewClass extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           children: [
-                            Text("TeacherID"),
+                            const Text("TeacherID"),
                             TextField(
-                              // label: 'Enter current password',
                               controller: TeacherID,
-                              // validator:  (value) =>
-                              // value.isEmpty ? 'Password cannot be blank' : null,
                             ),
                           ],
                         ),
@@ -195,7 +168,7 @@ class AddNewClass extends StatelessWidget {
                               ));
                             }
                           },
-                          child: Text("ADD CLASS"))
+                          child: const Text("ADD CLASS"))
                     ],
                   ),
                 ),

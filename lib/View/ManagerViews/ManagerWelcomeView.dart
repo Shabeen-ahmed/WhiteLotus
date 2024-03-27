@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart' as http;
-import 'package:provider/provider.dart';
 import 'package:white_lotus/View/ManagerViews/ManagerClassView.dart';
 import 'package:white_lotus/View/ManagerViews/ManagerCoursesView.dart';
-import 'package:white_lotus/ViewModel/ManagerViewModels/ManagerWorkshopViewModel.dart';
-import 'package:white_lotus/repo/ApiServices.dart';
 
-import '../ListOfStudiosView.dart';
 import 'ManagerRetreatView.dart';
 import 'ManagerWorkshopView.dart';
 
@@ -28,8 +23,6 @@ class ManagerMainView extends StatelessWidget {
             Column(
               children: [
                 ManagerUIButton(label: "Courses", onpress: (){
-                  // ApiService().fetchAllStudios();
-                  // Get.to(()=> ListOfStudiosView());
                   Get.to(()=>ManagerCoursesView(chosenStudioID: chosenStudioID,));
 
                 }),

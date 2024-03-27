@@ -1,6 +1,7 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:white_lotus/View/ManagerViews/ManagerAlterItemViews/AddNewWorkshop.dart';
 import 'package:white_lotus/ViewModel/ManagerViewModels/ManagerWorkshopViewModel.dart';
@@ -16,11 +17,9 @@ class ManagerWorkshopView extends StatefulWidget {
 }
 
 class _ManagerWorkshopViewState extends State<ManagerWorkshopView> {
-  // control_came_from get control_came_from_where => this.control_came_from_where;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     context
         .read<ManagerWorkshopViewModel>()
@@ -57,36 +56,29 @@ class _ManagerWorkshopViewState extends State<ManagerWorkshopView> {
                       return ListTile(
                         title: Text(managerWorkshopViewModel
                             .listOfWorkshops![index].workshopName),
-                        subtitle: GestureDetector(
-                          onTap: () {
-                            managerWorkshopViewModel.item_pressed(index);
-                            // Get.to(()=>ManagerDetailedCourseViewB());
-                            // listOfStudiosViewModel.listTile_pressed(index);
-                          },
-                          child: DisplayCard(
-                            body: Column(
-                              children: [
-                                Text(
-                                  "${managerWorkshopViewModel.listOfWorkshops![index].workshopName}", style: NormalText,),
-                                Text(
-                                    "${managerWorkshopViewModel.listOfWorkshops![index].price}", style: NormalText),
-                                Text(
-                                    "${managerWorkshopViewModel.listOfWorkshops![index].schedule}", style: NormalText),
-                                Text(
-                                    "${managerWorkshopViewModel.listOfWorkshops![index].duration}", style: NormalText),
-                                Text(
-                                    "${managerWorkshopViewModel.listOfWorkshops![index].theme}", style: NormalText),
-                                Text(
-                                    "${managerWorkshopViewModel.listOfWorkshops![index].teacherName}", style: NormalText),
-                                ElevatedButton(
-                                    onPressed: () {
-                                      managerWorkshopViewModel
-                                          .delete_pressed(index);
-                                    },
-                                    child: Icon(
-                                        Icons.delete_outline_outlined))
-                              ],
-                            ),
+                        subtitle: DisplayCard(
+                          body: Column(
+                            children: [
+                              Text(
+                                "${managerWorkshopViewModel.listOfWorkshops![index].workshopName}", style: NormalText,),
+                              Text(
+                                  "${managerWorkshopViewModel.listOfWorkshops![index].price}", style: NormalText),
+                              Text(
+                                  "${managerWorkshopViewModel.listOfWorkshops![index].schedule}", style: NormalText),
+                              Text(
+                                  "${managerWorkshopViewModel.listOfWorkshops![index].duration}", style: NormalText),
+                              Text(
+                                  "${managerWorkshopViewModel.listOfWorkshops![index].theme}", style: NormalText),
+                              Text(
+                                  "${managerWorkshopViewModel.listOfWorkshops![index].teacherName}", style: NormalText),
+                              ElevatedButton(
+                                  onPressed: () {
+                                    managerWorkshopViewModel
+                                        .delete_pressed(index);
+                                  },
+                                  child: Icon(
+                                      Icons.delete_outline_outlined))
+                            ],
                           ),
                         ),
                       );

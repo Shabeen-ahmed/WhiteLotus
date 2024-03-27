@@ -1,9 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:white_lotus/Model/RetreatModel.dart';
 import 'package:white_lotus/repo/ApiServices.dart';
 import 'package:white_lotus/repo/MemoryHandler.dart';
@@ -40,7 +37,6 @@ class CustomerRetreatViewModel extends ChangeNotifier {
   }
 
   void booking_pressed(int index) async {
-    //TODO: fix book saving by implementing shared preferences later
     var response = await ApiService().bookASession(
         userID: _userID,
         bookingItemID: listOfRetreats![index].retreatId,
@@ -57,33 +53,30 @@ class CustomerRetreatViewModel extends ChangeNotifier {
               "Retreat ${listOfRetreats![index].retreatName} appears to be booked out."));
     } else {
       if (response != null && response is double) {
-        // try {
-        double price = response;
-        await fetchRetreatsList(_chosenStudioID!);
-        saveBooking(index);
+        try {
+          double price = response;
+          await fetchRetreatsList(_chosenStudioID!);
+          saveBooking(index);
 
-        notifyListeners();
+          notifyListeners();
 
-        Get.back();
-        Get.defaultDialog(
-            title: "Retreat Booked Successfully",
-            content: Column(
-              children: [
-                Text(
-                    "Successfully booked Retreat ${listOfRetreats![index].retreatName}"),
-                Text(
-                  'Payment will be '
-                      '$price Pounds',
-                  style: GoogleFonts.montserrat(fontSize: 18),
-                )
-              ],
-            ));
-        print('boooked');
-        print(_bookedRetreats);
-        // }
-        // catch(e){
-        //   print('error');
-        // }
+          Get.back();
+          Get.defaultDialog(
+              title: "Retreat Booked Successfully",
+              content: Column(
+                children: [
+                  Text(
+                      "Successfully booked Retreat ${listOfRetreats![index].retreatName}"),
+                  Text(
+                    'Payment will be '
+                    '$price Pounds',
+                    style: GoogleFonts.montserrat(fontSize: 18),
+                  )
+                ],
+              ));
+        } catch (e) {
+          print('error');
+        }
       } else {
         print("chosen studio null");
       }
@@ -91,7 +84,6 @@ class CustomerRetreatViewModel extends ChangeNotifier {
   }
 
   void waiting_pressed(int index) async {
-    //TODO: fix book saving by implementing shared preferences later
     var response = await ApiService().waitingList(
         userID: _userID,
         waitingItemID: listOfRetreats![index].retreatId,
@@ -103,33 +95,30 @@ class CustomerRetreatViewModel extends ChangeNotifier {
           content: Text("Something went wrong. Please try again later"));
     } else {
       if (response != null && response is double) {
-        // try {
-        double price = response;
-        await fetchRetreatsList(_chosenStudioID!);
-        saveBooking(index);
+        try {
+          double price = response;
+          await fetchRetreatsList(_chosenStudioID!);
+          saveBooking(index);
 
-        notifyListeners();
+          notifyListeners();
 
-        Get.back();
-        Get.defaultDialog(
-            title: "Added To Waiting List Successfully",
-            content: Column(
-              children: [
-                Text(
-                    "Successfully added to waiting list for Retreat ${listOfRetreats![index].retreatName}"),
-                Text(
-                  'Payment will be '
-                      '$price Pounds',
-                  style: GoogleFonts.montserrat(fontSize: 18),
-                )
-              ],
-            ));
-        print('added');
-        print(_bookedRetreats);
-        // }
-        // catch(e){
-        //   print('error');
-        // }
+          Get.back();
+          Get.defaultDialog(
+              title: "Added To Waiting List Successfully",
+              content: Column(
+                children: [
+                  Text(
+                      "Successfully added to waiting list for Retreat ${listOfRetreats![index].retreatName}"),
+                  Text(
+                    'Payment will be '
+                    '$price Pounds',
+                    style: GoogleFonts.montserrat(fontSize: 18),
+                  )
+                ],
+              ));
+        } catch (e) {
+          print('error');
+        }
       } else {
         print("chosen studio null");
       }
@@ -145,14 +134,11 @@ class CustomerRetreatViewModel extends ChangeNotifier {
       Get.defaultDialog(
           title: "Something went wrong",
           content: Text("Something went wrong. Please try again later"));
-    }
-    // await fetchClassesList(_chosenStudioID!);
-    // saveBooking(index);
-    else if (response == Availibility.Free) {
+    } else if (response == Availibility.Free) {
       Get.defaultDialog(
           title: "Retreat is Available",
-          content:
-          Text("Do you want to book ${listOfRetreats![index].retreatName}?"),
+          content: Text(
+              "Do you want to book ${listOfRetreats![index].retreatName}?"),
           actions: [
             ElevatedButton(
                 onPressed: () {
@@ -165,14 +151,11 @@ class CustomerRetreatViewModel extends ChangeNotifier {
                 },
                 child: Text("Yes")),
           ]);
-
-      print('boooked');
-      print(_bookedRetreats);
     } else if (response == Availibility.Full) {
       Get.defaultDialog(
-        title: "Sorry, Retreat is Full",
-        content: Text(
-            "${listOfRetreats![index].retreatName} has booked out. Please try another Retreat."),
+          title: "Sorry, Retreat is Full",
+          content: Text(
+              "${listOfRetreats![index].retreatName} has booked out. Please try another Retreat."),
           actions: [
             ElevatedButton(
                 onPressed: () {
@@ -184,11 +167,7 @@ class CustomerRetreatViewModel extends ChangeNotifier {
                   waiting_pressed(index);
                 },
                 child: Text("Yes")),
-          ]
-      );
-
-      print('boooked');
-      print(_bookedRetreats);
+          ]);
     } else {
       Get.back();
       Get.defaultDialog(
@@ -199,13 +178,7 @@ class CustomerRetreatViewModel extends ChangeNotifier {
 
   getSavedBooking() async {
     _bookedRetreats = [];
-    // SharedPreferences prefs = await SharedPreferences.getInstance();
-    // await prefs.setString('savedBookings', '');
     var response = await MemoryHandler().getSavedBooking('savedBookings');
-    print("_bookedRetreats");
-    print(_bookedRetreats);
-    print(response);
-    print(response.runtimeType);
     response != null && response != ''
         ? _bookedRetreats = retreatModelFromJson(response)
         : null;

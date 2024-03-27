@@ -4,11 +4,15 @@
 //
 //     final studioClass = studioClassFromJson(jsonString);
 
+// ignore_for_file: file_names
+
 import 'dart:convert';
 
-List<StudioModel> studioClassFromJson(String str) => List<StudioModel>.from(json.decode(str).map((x) => StudioModel.fromJson(x)));
+List<StudioModel> studioClassFromJson(String str) => List<StudioModel>.from(
+    json.decode(str).map((x) => StudioModel.fromJson(x)));
 
-String studioClassToJson(List<StudioModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String studioClassToJson(List<StudioModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class StudioModel {
   int studioId;
@@ -26,18 +30,18 @@ class StudioModel {
   });
 
   factory StudioModel.fromJson(Map<String, dynamic> json) => StudioModel(
-    studioId: json["StudioID"],
-    studioName: json["StudioName"],
-    location: json["Location"],
-    contactNumber: json["ContactNumber"],
-    email: json["Email"],
-  );
+        studioId: json["StudioID"],
+        studioName: json["StudioName"],
+        location: json["Location"],
+        contactNumber: json["ContactNumber"],
+        email: json["Email"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "StudioID": studioId,
-    "StudioName": studioName,
-    "Location": location,
-    "ContactNumber": contactNumber,
-    "Email": email,
-  };
+        "StudioID": studioId,
+        "StudioName": studioName,
+        "Location": location,
+        "ContactNumber": contactNumber,
+        "Email": email,
+      };
 }

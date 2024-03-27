@@ -1,14 +1,23 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../ViewModel/ListOfStudiosVM.dart';
+import 'package:get/get.dart';
 
 kFloatingActionButton({required void Function() onpress}){
   return FloatingActionButton(
     child: Icon(Icons.add),
     onPressed: (){
       onpress();
+    },
+  );
+}
+
+
+kFloatingActionBack(){
+  return FloatingActionButton(
+    child: Icon(Icons.arrow_back_ios_new),
+    onPressed: (){
+     Get.back();
     },
   );
 }

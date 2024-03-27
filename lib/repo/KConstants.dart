@@ -7,9 +7,17 @@ enum control_came_from{
 // String ip ="http://192.168.1.180";
 // String ip ="http://172.19.38.59";
 // String ip ="http://172.20.46.21";
-String ip = "http://192.168.0.34";
+// String ip = "http://192.168.0.34";
+String ip = "http://192.168.1.180";
+
 String databaseName = "whitelotus";
 
+void setIP(String IP){
+  print(ip);
+  print(IP);
+  ip="http://$IP";
+  print(ip);
+}
 
 enum Status
 {

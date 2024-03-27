@@ -1,0 +1,9 @@
+
+{
+"include": ["lib/**"],
+"exclude": ["**/*.g.dart", "**/pubspec.yaml", "**/.packages"],
+  "filter": {
+    "type": "exclude",
+    "values": ["StatelessWidget", "StatefulWidget","flutter"]
+  }
+}

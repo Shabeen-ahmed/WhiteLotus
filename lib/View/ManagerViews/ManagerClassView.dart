@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:white_lotus/View/ManagerViews/ManagerAlterItemViews/AddNewClass.dart';
-import 'package:white_lotus/View/ManagerViews/BRICKEDManagerDetailedItemView.dart';
-import 'package:white_lotus/ViewModel/ListOfStudiosVM.dart';
 import 'package:white_lotus/ViewModel/ManagerViewModels/ManagerClassVM.dart';
-import 'package:white_lotus/ViewModel/ManagerViewModels/ManagerCoursesVM.dart';
-import 'package:white_lotus/repo/ApiServices.dart';
-import 'package:white_lotus/repo/KConstants.dart';
 import 'package:white_lotus/repo/KConstantsUI.dart';
 
 class ManagerClassesView extends StatefulWidget {
@@ -22,11 +16,8 @@ class ManagerClassesView extends StatefulWidget {
 }
 
 class _ManagerClassesViewState extends State<ManagerClassesView> {
-  // control_came_from get control_came_from_where => this.control_came_from_where;
-
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     context
         .read<ManagerClassesViewModel>()
@@ -45,7 +36,7 @@ class _ManagerClassesViewState extends State<ManagerClassesView> {
           ? Center(child: CircularProgressIndicator())
           : managerClassesViewModel.listOfClasses != null
               ? SingleChildScrollView(
-                child: Column(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text("All Classes"),
@@ -63,40 +54,35 @@ class _ManagerClassesViewState extends State<ManagerClassesView> {
                                 return ListTile(
                                   title: Text(managerClassesViewModel
                                       .listOfClasses![index].className),
-                                  subtitle: GestureDetector(
-                                    onTap: () {
-                                      managerClassesViewModel.item_pressed(index);
-                                      // Get.to(()=>ManagerDetailedCourseViewB());
-                                      // listOfStudiosViewModel.listTile_pressed(index);
-                                    },
-                                    child: DisplayCard(
-                                      body: Column(
-                                        children: [
-                                          Text(
-                                              "${managerClassesViewModel.listOfClasses![index].teacherName}", style: NormalText,),
-                                          Text(
-                                              "${managerClassesViewModel.listOfClasses![index].price}"),
-                                          Text(
-                                              "${managerClassesViewModel.listOfClasses![index].courseName}"),
-                                          Text(
-                                              "${managerClassesViewModel.listOfClasses![index].capacity}"),
-                                          Text(
-                                              "${managerClassesViewModel.listOfClasses![index].duration}"),
-                                          Text(
-                                              "${managerClassesViewModel.listOfClasses![index].level}"),
-                                          Text(
-                                              "${managerClassesViewModel.listOfClasses![index].schedule}"),
-                                          Text(
-                                              "${managerClassesViewModel.listOfClasses![index].type}"),
-                                          ElevatedButton(
-                                              onPressed: () {
-                                                managerClassesViewModel
-                                                    .delete_pressed(index);
-                                              },
-                                              child: Icon(
-                                                  Icons.delete_outline_outlined))
-                                        ],
-                                      ),
+                                  subtitle: DisplayCard(
+                                    body: Column(
+                                      children: [
+                                        Text(
+                                          "${managerClassesViewModel.listOfClasses![index].teacherName}",
+                                          style: NormalText,
+                                        ),
+                                        Text(
+                                            "${managerClassesViewModel.listOfClasses![index].price}"),
+                                        Text(
+                                            "${managerClassesViewModel.listOfClasses![index].courseName}"),
+                                        Text(
+                                            "${managerClassesViewModel.listOfClasses![index].capacity}"),
+                                        Text(
+                                            "${managerClassesViewModel.listOfClasses![index].duration}"),
+                                        Text(
+                                            "${managerClassesViewModel.listOfClasses![index].level}"),
+                                        Text(
+                                            "${managerClassesViewModel.listOfClasses![index].schedule}"),
+                                        Text(
+                                            "${managerClassesViewModel.listOfClasses![index].type}"),
+                                        ElevatedButton(
+                                            onPressed: () {
+                                              managerClassesViewModel
+                                                  .delete_pressed(index);
+                                            },
+                                            child: Icon(Icons
+                                                .delete_outline_outlined))
+                                      ],
                                     ),
                                   ),
                                 );
@@ -107,10 +93,9 @@ class _ManagerClassesViewState extends State<ManagerClassesView> {
                       )
                     ],
                   ),
-              )
+                )
               : SingleChildScrollView(
-                child: Column(
-                        
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text("Please add a class to see it here."),
@@ -121,7 +106,7 @@ class _ManagerClassesViewState extends State<ManagerClassesView> {
                           child: Text("Add New Class"))
                     ],
                   ),
-              ),
+                ),
     );
   }
 
