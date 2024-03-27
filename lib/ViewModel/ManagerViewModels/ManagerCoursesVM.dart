@@ -5,6 +5,7 @@ import 'package:white_lotus/repo/ApiServices.dart';
 
 import '../../repo/KConstants.dart';
 
+//view model for handling courses data for manager
 class ManagerCoursesViewModel extends ChangeNotifier {
   List<CourseModel>? listOfCourses;
   int? _chosenStudioID;

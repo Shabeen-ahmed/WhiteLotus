@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../ViewModel/CustomerViewModels/CustomerClassViewModel.dart';
 import '../../repo/KConstantsUI.dart';
 
+//Customer screen for viewing classes
 class CustomerClassesView extends StatefulWidget {
   const CustomerClassesView(
       {required this.chosenStudioID, required this.userID, super.key});
@@ -142,6 +143,7 @@ class _CustomerClassesViewState extends State<CustomerClassesView> {
             ),
     );
   }
+
 
   InitialUIButton({required String label, required void Function() onpress}) {
     return Padding(

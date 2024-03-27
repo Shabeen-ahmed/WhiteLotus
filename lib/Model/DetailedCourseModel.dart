@@ -9,6 +9,7 @@ List<DetailedCourseModel> detailedCourseModelFromJson(String str) =>
 String detailedCourseModelToJson(List<DetailedCourseModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
+//detailed course model for handling number of classes inside a course
 class DetailedCourseModel {
   String courseId;
   String courseName;

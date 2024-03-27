@@ -4,6 +4,8 @@ import 'package:white_lotus/Model/WorkshopModel.dart';
 import 'package:white_lotus/repo/ApiServices.dart';
 import 'package:white_lotus/repo/KConstants.dart';
 
+//manager view of adding new workshop. This view also handles tapping into
+// ApiService class as implementing a view model for this will be counterproductive.
 class AddNewWorkshop extends StatelessWidget {
   TextEditingController WorkshopName = TextEditingController();
   TextEditingController Theme = TextEditingController();

@@ -14,6 +14,7 @@ List<StudioModel> studioClassFromJson(String str) => List<StudioModel>.from(
 String studioClassToJson(List<StudioModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
+//studio model. such models are defined with factory to convert them from json strings which is used to handle them after getting the data from the databse
 class StudioModel {
   int studioId;
   String studioName;

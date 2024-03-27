@@ -5,6 +5,7 @@ import 'package:white_lotus/repo/KConstants.dart';
 
 import '../../repo/ApiServices.dart';
 
+//view model for handling logging and registering of customer
 class CustomerLoginRegisterViewModel extends ChangeNotifier {
   login_pressed(String emailID) async {
     var response = await ApiService().login(emailID);

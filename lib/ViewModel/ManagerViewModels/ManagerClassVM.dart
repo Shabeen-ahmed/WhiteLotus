@@ -6,6 +6,7 @@ import 'package:white_lotus/repo/ApiServices.dart';
 import '../../View/ManagerViews/ManagerAlterItemViews/AddNewClass.dart';
 import '../../repo/KConstants.dart';
 
+//view model for handling classes data for manager
 class ManagerClassesViewModel extends ChangeNotifier {
   bool _isloading = true;
   List<ClassModel>? listOfClasses;

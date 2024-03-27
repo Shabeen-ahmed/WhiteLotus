@@ -7,6 +7,7 @@ import 'package:white_lotus/View/CustomerViews/CustomerWorkshopView.dart';
 import 'package:white_lotus/View/CustomerViews/CustomerRetreatView.dart';
 import 'package:white_lotus/View/CustomerViews/CustomerCancelView.dart';
 
+//home view of customer
 class CustomerWelcomeView extends StatelessWidget {
   CustomerWelcomeView(this.chosenStudioID, this.userID, {super.key});
 

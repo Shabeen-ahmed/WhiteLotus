@@ -7,6 +7,7 @@ import 'package:white_lotus/ViewModel/CustomerViewModels/CustomerCourseViewModel
 
 import '../../repo/KConstantsUI.dart';
 
+//customer view of seeing different classes enrolled to a specific course
 class CustomerCoursesDetailedView extends StatefulWidget {
   const CustomerCoursesDetailedView({required this.index, super.key});
 

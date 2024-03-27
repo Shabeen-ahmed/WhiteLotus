@@ -12,16 +12,22 @@ import 'package:flutter/material.dart';
 import '../Model/RetreatModel.dart';
 import 'KConstants.dart';
 
+//ApiService class handles all the fetching and  posting to the database.
 class ApiService {
   fetchAllStudios() async {
     try {
+      //parsing the url to post
       var url = Uri.parse("$ip/$databaseName/fetchAllStudios.php");
+      //posts to the defined url
       final response = await http.post(url);
       print("response");
       print(response.body);
 
+      //checks if the status code of the response is successful
       if (response.statusCode == 200) {
         print(response.body);
+        //if it is, converts the string response to list of studio classes and then returns
+        // it back to wherever the call came from in the first place
         List<StudioModel> studioClasses = studioClassFromJson(response.body);
         return studioClasses;
       } else {

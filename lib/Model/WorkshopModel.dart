@@ -9,6 +9,7 @@ List<WorkshopModel> workshopModelFromJson(String str) =>
 String workshopModelToJson(List<WorkshopModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
+//workshop model
 class WorkshopModel {
   String? workshopId;
   String workshopName;

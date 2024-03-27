@@ -4,6 +4,7 @@ import 'package:white_lotus/repo/KConstants.dart';
 
 import '../../repo/ApiServices.dart';
 
+//view moel logic for cancelling booking
 class CustomerCancelViewModel extends ChangeNotifier {
 
   submit_pressed(String bookingID)async {

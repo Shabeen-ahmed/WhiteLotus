@@ -11,6 +11,7 @@ String courseModelToJsonForSP(CourseModel data) =>
 String listOfCourseModelToJsonForSP(List<CourseModel> data) => json.encode(
     List<dynamic>.from(data.map((x) => x.toJsonForSP()))); //shared preference
 
+//course model
 class CourseModel {
   String? courseId;
   String courseName;

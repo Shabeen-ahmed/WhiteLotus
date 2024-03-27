@@ -5,6 +5,7 @@ import 'package:white_lotus/repo/ApiServices.dart';
 import '../../View/ManagerViews/ManagerAlterItemViews/AddNewWorkshop.dart';
 import '../../repo/KConstants.dart';
 
+//view model for handling retreats data for manager
 class ManagerRetreatViewModel extends ChangeNotifier {
   bool _isloading = true;
   List<RetreatModel>? listOfRetreats;

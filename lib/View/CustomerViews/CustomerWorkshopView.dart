@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../ViewModel/CustomerViewModels/CustomerWorkshopViewModel.dart';
 import '../../repo/KConstantsUI.dart';
 
+//cutsomer view of workshops
 class CustomerWorkshopsView extends StatefulWidget {
   const CustomerWorkshopsView(
       {required this.chosenStudioID, required this.userID, super.key});

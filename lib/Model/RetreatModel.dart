@@ -6,6 +6,7 @@ List<RetreatModel> retreatModelFromJson(String str) => List<RetreatModel>.from(
 String retreatModelToJson(List<RetreatModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
+//retreat model
 class RetreatModel {
   String? retreatId;
   String retreatName;

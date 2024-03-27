@@ -7,7 +7,7 @@ List<ClassModel> classModelFromJson(String str) =>
 
 String classModelToJson(List<ClassModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
+//class model for classes
 class ClassModel {
   String? classId;
   String className;

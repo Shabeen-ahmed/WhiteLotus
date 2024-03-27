@@ -1,3 +1,4 @@
+//memory handler class handles all the data about saving and retrieving from device.
 
 import 'dart:convert';
 

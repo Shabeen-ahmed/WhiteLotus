@@ -7,6 +7,7 @@ import 'package:white_lotus/View/ManagerViews/ManagerCoursesView.dart';
 import 'ManagerRetreatView.dart';
 import 'ManagerWorkshopView.dart';
 
+//manager view of list of sessions
 class ManagerMainView extends StatelessWidget {
    ManagerMainView(this.chosenStudioID, {super.key});
 

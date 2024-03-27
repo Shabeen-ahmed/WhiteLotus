@@ -6,6 +6,7 @@ import 'package:white_lotus/ViewModel/ManagerViewModels/ManagerCoursesVM.dart';
 
 import '../../repo/KConstantsUI.dart';
 import 'ManagerAlterItemViews/AddNewCourse.dart';
+// Manager view of courses list
 
 class ManagerCoursesView extends StatefulWidget {
   ManagerCoursesView({required this.chosenStudioID, super.key});

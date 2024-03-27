@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../ViewModel/CustomerViewModels/CustomerLogInRegisterViewModel.dart';
 
+//login view of customer
 class CustomerLoginView extends StatelessWidget {
   TextEditingController userID = TextEditingController();
 

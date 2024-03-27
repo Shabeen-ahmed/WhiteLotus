@@ -5,15 +5,18 @@ import 'package:provider/provider.dart';
 import 'package:white_lotus/ViewModel/InitialUIVM.dart';
 import '../repo/KConstants.dart';
 
+
+//The user interface of the initial welcome screen
 class InitialUI extends StatelessWidget {
   const InitialUI({super.key});
 
   @override
   Widget build(BuildContext context) {
-    InitialUIViewModel initialUIViewModel = context.watch<InitialUIViewModel>();
+    InitialUIViewModel initialUIViewModel = context.watch<InitialUIViewModel>();//appropriate view model initialized for this view
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          //on pressing the settings icon, user can set the ip address of their wifi network. Keep in mind to import the db and run the localhost servers in order to run the app
           TextEditingController ipField = TextEditingController();
           Get.defaultDialog(
               title: 'Set IP Address',
@@ -41,6 +44,7 @@ class InitialUI extends StatelessWidget {
                 InitialUIButton(
                     label: "General Manager",
                     onpress: () {
+                      //calling method defined inside viewmodel
                       initialUIViewModel.generalManagerButton_pressed();
                     }),
                 InitialUIButton(

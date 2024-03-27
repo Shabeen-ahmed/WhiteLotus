@@ -5,7 +5,8 @@ import 'package:get/get.dart';
 import 'package:white_lotus/Model/CourseModel.dart';
 import 'package:white_lotus/repo/ApiServices.dart';
 import 'package:white_lotus/repo/KConstants.dart';
-
+//manager view of adding new course. This view also handles tapping into
+// ApiService class as implementing a view model for this will be counterproductive.
 class AddNewCourse extends StatelessWidget {
   TextEditingController CourseName = TextEditingController();
   TextEditingController StartDate = TextEditingController();

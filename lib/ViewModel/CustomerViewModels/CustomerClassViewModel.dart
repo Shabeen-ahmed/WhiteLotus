@@ -6,6 +6,7 @@ import 'package:white_lotus/repo/ApiServices.dart';
 import 'package:white_lotus/repo/MemoryHandler.dart';
 import '../../repo/KConstants.dart';
 
+//view model for handling classes for customer
 class CustomerClassViewModel extends ChangeNotifier {
   List<ClassModel>? listOfClasses;
   List<ClassModel> _bookedClasses = [];

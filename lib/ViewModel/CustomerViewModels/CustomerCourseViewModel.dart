@@ -7,7 +7,7 @@ import 'package:white_lotus/repo/ApiServices.dart';
 import '../../View/CustomerViews/CustomerCoursesDetailedView.dart';
 import '../../repo/KConstants.dart';
 import '../../repo/MemoryHandler.dart';
-
+//view model for handling courses data for customer
 class CustomerCoursesViewModel extends ChangeNotifier {
   List<CourseModel>? listOfCourses;
   List<CourseModel> bookedCourses = [];

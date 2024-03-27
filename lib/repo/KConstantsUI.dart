@@ -1,11 +1,11 @@
-
+//some constant ui elements defined which is reused in different parts of the application
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 
 kFloatingActionButton({required void Function() onpress}){
   return FloatingActionButton(
-    child: Icon(Icons.add),
+    child: const Icon(Icons.add),
     onPressed: (){
       onpress();
     },

@@ -6,6 +6,7 @@ import 'package:white_lotus/repo/ApiServices.dart';
 import 'package:white_lotus/repo/MemoryHandler.dart';
 import '../../repo/KConstants.dart';
 
+//view model for handling retreat data for customer
 class CustomerRetreatViewModel extends ChangeNotifier {
   List<RetreatModel>? listOfRetreats;
   List<RetreatModel> _bookedRetreats = [];

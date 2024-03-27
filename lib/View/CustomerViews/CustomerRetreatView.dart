@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../ViewModel/CustomerViewModels/CustomerRetreatViewModel.dart';
 import '../../repo/KConstantsUI.dart';
 
+//customer view of retreats
 class CustomerRetreatsView extends StatefulWidget {
   const CustomerRetreatsView(
       {required this.chosenStudioID, required this.userID, super.key});

@@ -6,7 +6,7 @@ import 'package:white_lotus/View/ManagerViews/ManagerWelcomeView.dart';
 import 'package:white_lotus/repo/ApiServices.dart';
 
 import '../repo/KConstants.dart';
-
+//Viewmodel for list of studios views
 class ListOfStudiosViewModel extends ChangeNotifier {
   control_came_from? _where;
   List<StudioModel>? studioClasses;
@@ -16,6 +16,7 @@ class ListOfStudiosViewModel extends ChangeNotifier {
   setControl(control_came_from where, String? userID) {
     _where = where;
     userID != null ? _userID = userID : null;
+    fetchStudioList();
   }
 
   fetchStudioList() async {

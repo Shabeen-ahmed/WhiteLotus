@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:white_lotus/ViewModel/CustomerViewModels/CustomerCourseViewModel.dart';
 
 import '../../repo/KConstantsUI.dart';
-
+//customer view of different courses
 class CustomerCoursesView extends StatefulWidget {
   CustomerCoursesView(
       {required this.chosenStudioID, required this.userID, super.key});

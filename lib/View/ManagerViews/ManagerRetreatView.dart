@@ -6,6 +6,7 @@ import 'package:white_lotus/repo/KConstantsUI.dart';
 import '../../ViewModel/ManagerViewModels/ManagerRetreatViewModel.dart';
 import 'ManagerAlterItemViews/AddNewRetreat.dart';
 
+// Manager view of retreats list
 class ManagerRetreatView extends StatefulWidget {
   ManagerRetreatView({required this.chosenStudioID, super.key});
 

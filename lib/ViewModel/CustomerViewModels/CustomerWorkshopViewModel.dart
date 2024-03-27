@@ -5,7 +5,7 @@ import 'package:white_lotus/Model/WorkshopModel.dart';
 import 'package:white_lotus/repo/ApiServices.dart';
 import 'package:white_lotus/repo/MemoryHandler.dart';
 import '../../repo/KConstants.dart';
-
+//view model for handling workshops data for customer
 class CustomerWorkshopViewModel extends ChangeNotifier {
   List<WorkshopModel>? listOfWorkshops;
   List<WorkshopModel> _bookedWorkshops = [];

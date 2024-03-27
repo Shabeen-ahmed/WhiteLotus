@@ -1,3 +1,5 @@
+//some variables which is supposed to stay constant through out the application
+
 enum control_came_from{
   GeneralManager,
   Managers,

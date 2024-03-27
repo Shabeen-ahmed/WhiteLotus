@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:white_lotus/View/ManagerViews/ManagerAlterItemViews/AddNewWorkshop.dart';
 import 'package:white_lotus/ViewModel/ManagerViewModels/ManagerWorkshopViewModel.dart';
 import 'package:white_lotus/repo/KConstantsUI.dart';
-
+// managaer view of workshop list
 class ManagerWorkshopView extends StatefulWidget {
   ManagerWorkshopView({required this.chosenStudioID, super.key});
 

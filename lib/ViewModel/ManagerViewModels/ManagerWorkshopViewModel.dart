@@ -5,6 +5,7 @@ import 'package:white_lotus/repo/ApiServices.dart';
 import '../../View/ManagerViews/ManagerAlterItemViews/AddNewWorkshop.dart';
 import '../../repo/KConstants.dart';
 
+//view model for handling workshops data for manager
 class ManagerWorkshopViewModel extends ChangeNotifier {
   bool _isloading = true;
   List<WorkshopModel>? listOfWorkshops;

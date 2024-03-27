@@ -7,6 +7,8 @@ import 'package:white_lotus/ViewModel/ListOfStudiosVM.dart';
 import 'package:white_lotus/repo/KConstants.dart';
 import '../repo/KConstantsUI.dart';
 
+//List of Studios view which is re-used 3 types across the app with the help of control_came_from_where.
+//this view shows the list of studios from the database and user have to pick one
 class ListOfStudiosView extends StatefulWidget {
   ListOfStudiosView(
       {required this.control_came_from_where, this.userID, super.key});
@@ -22,10 +24,11 @@ class _ListOfStudiosViewState extends State<ListOfStudiosView> {
   @override
   void initState() {
     super.initState();
+    //while the state is initialized, necessary methods for loading the lists are also called by overriding the pre defined initState method
     context
         .read<ListOfStudiosViewModel>()
         .setControl(widget.control_came_from_where, widget.userID);
-    context.read<ListOfStudiosViewModel>().fetchStudioList();
+
   }
 
   @override

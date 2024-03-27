@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../ViewModel/CustomerViewModels/CustomerCancelViewModel.dart';
 
+//view of customer booking cancellation screen
 class CustomerCancelView extends StatelessWidget {
   TextEditingController bookingID = TextEditingController();
 
