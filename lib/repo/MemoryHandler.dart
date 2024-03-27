@@ -11,11 +11,7 @@ import 'package:white_lotus/Model/WorkshopModel.dart';
 class MemoryHandler{
 
   Future<String?> getSavedBooking(String key) async {
-
-    // SharedPreferences prefs = await SharedPreferences.getInstance();
-    // await prefs.setString('token', '${jsonResponse['token']}');
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    // await prefs.setString(key, '');
     String? retrievedValue = prefs.getString(key);
     return retrievedValue;
   }
