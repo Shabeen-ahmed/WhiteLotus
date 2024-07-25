@@ -133,7 +133,7 @@ class ApiService {
   }
 
   fetchRetreats(int studioID) async {
-    try {
+    // try {
       var url = Uri.parse("$ip/$databaseName/fetchRetreat.php");
 
       final response = await http.post(
@@ -145,7 +145,11 @@ class ApiService {
       print("=response");
       print(response.body);
       if (response.statusCode == 200) {
+        print("here");
+        print(response.body.runtimeType);
         List<RetreatModel> retreats = retreatModelFromJson(response.body);
+        print("here");
+        print(retreats);
         return retreats;
       } else {
         Get.back();
@@ -155,10 +159,11 @@ class ApiService {
                 Text('Request failed with status: ${response.statusCode}.'));
         print('Request failed with status: ${response.statusCode}.');
       }
-    } catch (e) {
-      print("EXCEPTION CAUGHT");
-      print(e.toString());
-    }
+    // }
+    // catch (e) {
+    //   print("EXCEPTION CAUGHT");
+    //   print(e.toString());
+    // }
   }
 
   addNewClass(ClassModel classToAdd) async {

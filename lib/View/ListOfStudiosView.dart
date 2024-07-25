@@ -7,7 +7,7 @@ import 'package:white_lotus/ViewModel/ListOfStudiosVM.dart';
 import 'package:white_lotus/repo/KConstants.dart';
 import '../repo/KConstantsUI.dart';
 
-//List of Studios view which is re-used 3 types across the app with the help of control_came_from_where.
+//List of Studios view which is re-used 3 times across the app with the help of control_came_from_where.
 //this view shows the list of studios from the database and user have to pick one
 class ListOfStudiosView extends StatefulWidget {
   ListOfStudiosView(

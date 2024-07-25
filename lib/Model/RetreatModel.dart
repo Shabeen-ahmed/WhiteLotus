@@ -1,7 +1,20 @@
 import 'dart:convert';
 
-List<RetreatModel> retreatModelFromJson(String str) => List<RetreatModel>.from(
-    json.decode(str).map((x) => RetreatModel.fromJson(x)));
+// List<RetreatModel> retreatModelFromJson(String str) => List<RetreatModel>.from(
+//     json.decode(str).map((x) => RetreatModel.fromJson(x)));
+
+List<RetreatModel> retreatModelFromJson(String str) {
+  List<dynamic> jsonList = json.decode(str);
+  List<RetreatModel> retreatModels = [];
+
+  for (var jsonItem in jsonList) {
+    RetreatModel retreatModel = RetreatModel.fromJson(jsonItem);
+    retreatModels.add(retreatModel);
+  }
+
+  return retreatModels;
+}
+
 
 String retreatModelToJson(List<RetreatModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
